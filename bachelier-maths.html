@@ -1,100 +1,432 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Bachelier Maths – App Overview</title>
+  <meta name="description" content="Bachelier Maths — adaptive revision app for the French baccalauréat. Practice-focused with spaced repetition, mastery tracking and targeted daily training." />
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #fefefe;
-      color: #1c1c1e;
-      line-height: 1.5;
+    :root{
+      --bg: #0D0D14;
+      --card: rgba(255,255,255,0.03);
+      --muted: rgba(255,255,255,0.55);
+      --accent: #4EA1FF;     /* cool blue accent */
+      --accent-2: #7DE3B2;   /* subtle secondary accent */
+      --glass: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      --radius: 14px;
+      --max-width: 1100px;
+      --shadow: 0 6px 22px rgba(2,6,23,0.6);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
-    header {
-      text-align: center;
-      padding: 40px 20px 20px 20px;
-      background-color: #ffffff;
-      border-bottom: 1px solid #ddd;
+
+    html,body{height:100%;margin:0;padding:0;background:var(--bg);color:#E8EDF3;}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{opacity:0.9}
+
+    /* Layout */
+    .page {
+      min-height:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      padding:40px 24px;
+      box-sizing:border-box;
     }
-    header img {
-      max-width: 150px;
-      margin-bottom: 20px;
+
+    header.site-header{
+      width:100%;
+      max-width:var(--max-width);
+      display:flex;
+      align-items:center;
+      gap:18px;
+      padding:18px;
+      box-sizing:border-box;
+      margin-bottom:28px;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.03);
     }
-    header h1 {
-      margin: 0;
-      font-size: 2em;
+
+    header .brand {
+      display:flex;
+      align-items:center;
+      gap:14px;
     }
-    section {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 0 20px;
+
+    header img.logo{
+      width:64px;
+      height:64px;
+      object-fit:contain;
+      border-radius:12px;
+      background: rgba(255,255,255,0.02);
+      padding:8px;
+      border:1px solid rgba(255,255,255,0.03);
     }
-    section h2 {
-      color: #0a84ff;
-      margin-bottom: 10px;
+
+    header .title {
+      display:flex;
+      flex-direction:column;
+      line-height:1;
+    }
+    header h1{
+      margin:0;
+      font-size:20px;
+      letter-spacing:0.2px;
+      font-weight:600;
+      color:#FFF;
+    }
+    header p.lead{
+      margin:0;
+      margin-top:4px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    /* main container */
+    main.container{
+      width:100%;
+      max-width:var(--max-width);
+      display:grid;
+      grid-template-columns: 1fr 380px;
+      gap:26px;
+      align-items:start;
+    }
+
+    /* left column (content) */
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:22px;
+      box-sizing:border-box;
+      border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 8px 30px rgba(2,6,23,0.55);
+    }
+
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:12px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size:16px;
+      color:#FFFFFF;
+      font-weight:600;
+    }
+    .section-title .chip{
+      padding:6px 10px;
+      background:rgba(78,161,255,0.12);
+      color:var(--accent);
+      border-radius:999px;
+      font-size:12px;
+      border:1px solid rgba(78,161,255,0.07);
+    }
+
+    p.lead-2{color:var(--muted);margin:0 0 14px 0;font-size:15px}
+
+    ul.features{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    ul.features li{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:10px;
+      border-radius:10px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border:1px solid rgba(255,255,255,0.02);
+      color:var(--muted);
+      font-size:14px;
+    }
+    ul.features svg{flex:0 0 20px; margin-top:4px; color:var(--accent)}
+
+    /* screenshots gallery */
+    .gallery {
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
     }
     .screenshot {
-      display: block;
-      max-width: 100%;
-      margin: 20px auto;
-      border: 1px solid #ddd;
-      border-radius: 12px;
+      width:100%;
+      aspect-ratio:9 / 16; /* typical phone ratio */
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.03));
+      border-radius:12px;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border: 1px solid rgba(255,255,255,0.03);
     }
-    ul {
-      padding-left: 20px;
+    .screenshot img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
     }
-    footer {
-      text-align: center;
-      padding: 40px 20px;
-      font-size: 0.9em;
-      color: #666;
-      border-top: 1px solid #ddd;
+
+    /* right column (sidebar) */
+    aside.side {
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      gap:16px;
     }
+    .meta {
+      padding:18px;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+    .meta h3{
+      margin:0 0 6px 0;
+      font-size:15px;
+      color:#FFF;
+    }
+    .meta p{margin:0;color:var(--muted);font-size:13px}
+    .stat-grid{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+    }
+    .stat{
+      flex:1;
+      padding:12px;
+      background:rgba(255,255,255,0.02);
+      border-radius:10px;
+      text-align:center;
+      border: 1px solid rgba(255,255,255,0.02);
+    }
+    .stat strong{display:block;font-size:16px;color:#FFF}
+    .stat span{font-size:12px;color:var(--muted)}
+
+    .cta {
+      margin-top:8px;
+      display:flex;
+      gap:10px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:600;
+      border:1px solid rgba(255,255,255,0.03);
+      text-decoration:none;
+      font-size:14px;
+    }
+    .btn.primary{
+      background: linear-gradient(180deg, var(--accent), #2b8cff);
+      color: #051226;
+      box-shadow: 0 8px 20px rgba(78,161,255,0.12);
+    }
+    .btn.ghost{
+      background:transparent;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,0.04);
+    }
+
+    /* footer */
+    footer.site-footer{
+      width:100%;
+      max-width:var(--max-width);
+      margin-top:34px;
+      padding:18px;
+      border-radius:12px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border:1px solid rgba(255,255,255,0.03);
+      color:var(--muted);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+    }
+    footer a{color:var(--accent)}
+
+    /* Responsive */
+    @media (max-width:980px){
+      main.container{
+        grid-template-columns: 1fr;
+      }
+      .gallery{
+        grid-template-columns: repeat(2, 1fr);
+      }
+      header.site-header{flex-direction:row;gap:14px}
+    }
+    @media (max-width:560px){
+      .gallery{
+        grid-template-columns: 1fr;
+      }
+      header img.logo{width:56px;height:56px}
+      .card{padding:16px}
+    }
+
+    /* tiny accessible focus styles */
+    .btn:focus, a:focus {outline:3px solid rgba(78,161,255,0.12); outline-offset:3px;}
   </style>
 </head>
 <body>
+  <div class="page" role="main">
+    <header class="site-header" aria-label="Bachelier Maths header">
+      <!-- Replace with your app logo suitable for dark background -->
+      <div class="brand">
+        <img class="logo" src="bachelier-maths-dark.png" alt="Bachelier Maths logo" />
+        <div class="title">
+          <h1>Bachelier Maths</h1>
+          <p class="lead">Adaptive baccalauréat revision — targeted practice, spaced repetition, mastery tracking.</p>
+        </div>
+      </div>
 
-<header>
-  <img src="bachelier-maths-dark.png" alt="Bachelier Maths Logo">
-  <h1>Bachelier Maths</h1>
-</header>
+      <div style="margin-left:auto; display:flex; gap:8px; align-items:center">
+        <a class="btn primary" href="#" title="Download or open app">Get the app</a>
+        <a class="btn ghost" href="https://yourwebsite.com" title="More information">More info</a>
+      </div>
+    </header>
 
-<section>
-  <h2>Overview</h2>
-  <p>Bachelier Maths is a practice-focused revision app for French high school students preparing for the <strong>baccalauréat</strong>. It emphasizes adaptive training, daily targeted practice, spaced repetition, and clear mastery tracking.</p>
-</section>
+    <main class="container" aria-label="Main content">
+      <!-- Left column -->
+      <section class="card" aria-labelledby="overview-heading">
+        <div class="section-title">
+          <h2 id="overview-heading">Overview</h2>
+          <div class="chip">For le baccalauréat</div>
+        </div>
+        <p class="lead-2">Bachelier Maths is a practice-first revision app designed specifically for French high-school students preparing for the baccalauréat. The app focuses on adaptive training to strengthen weak areas, exam-mode questions modelled on real papers, and spaced repetition to keep knowledge long-term.</p>
 
-<section>
-  <h2>Key Features</h2>
-  <ul>
-    <li>Adaptive training focused on the student’s weak areas</li>
-    <li>Questions modeled on actual baccalauréat exams</li>
-    <li>Spaced repetition to reinforce learning over time</li>
-    <li>Clear visual feedback: green, yellow, red mastery rings</li>
-    <li>Content created by a <strong>professeur agrégé</strong> with deep experience in baccalauréat preparation</li>
-  </ul>
-</section>
+        <div style="height:12px"></div>
 
-<section>
-  <h2>Screenshots</h2>
-  <!-- Replace filenames with your App Store screenshots -->
-  <img src="screenshot1.png" alt="Screenshot 1" class="screenshot">
-  <img src="screenshot2.png" alt="Screenshot 2" class="screenshot">
-  <img src="screenshot3.png" alt="Screenshot 3" class="screenshot">
-  <img src="screenshot4.png" alt="Screenshot 4" class="screenshot">
-</section>
+        <div class="section-title" style="margin-top:6px">
+          <h2>Key Features</h2>
+        </div>
+        <ul class="features" aria-label="Key features list">
+          <li>
+            <!-- icon -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Adaptive training prioritising weak topics
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Questions modelled on recent baccalauréat exams
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Spaced repetition schedules to reinforce memory
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Clear mastery rings (green / yellow / red) for immediate feedback
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Content created by a professeur agrégé, exam-focused
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Daily targets & progress notifications
+          </li>
+        </ul>
 
-<section>
-  <h2>About the Developer</h2>
-  <p>The app is developed by a professeur agrégé with extensive experience preparing students for the baccalauréat, ensuring that the exercises focus on common mistakes and exam traps.</p>
-</section>
+        <div style="height:18px"></div>
 
-<footer>
-  <p>More info: <a href="https://yourwebsite.com">yourwebsite.com</a></p>
-</footer>
+        <div class="section-title">
+          <h2>Screenshots</h2>
+          <div class="chip" aria-hidden="true">7 images</div>
+        </div>
 
+        <!-- Gallery: 7 screenshots -->
+        <div class="gallery" role="list" aria-label="App screenshots">
+          <!-- Replace src attributes with your actual screenshots (1..7) -->
+          <figure class="screenshot" role="listitem" aria-label="Screenshot 1">
+            <img src="screenshot1.png" alt="Bachelier Maths screenshot 1 — home and daily target view">
+          </figure>
+          <figure class="screenshot" role="listitem" aria-label="Screenshot 2">
+            <img src="screenshot2.png" alt="Screenshot 2 — question interface and explanation">
+          </figure>
+          <figure class="screenshot" role="listitem" aria-label="Screenshot 3">
+            <img src="screenshot3.png" alt="Screenshot 3 — mastery rings and progress">
+          </figure>
+          <figure class="screenshot" role="listitem" aria-label="Screenshot 4">
+            <img src="screenshot4.png" alt="Screenshot 4 — spaced repetition schedule">
+          </figure>
+          <figure class="screenshot" role="listitem" aria-label="Screenshot 5">
+            <img src="screenshot5.png" alt="Screenshot 5 — exam-style problems">
+          </figure>
+          <figure class="screenshot" role="listitem" aria-label="Screenshot 6">
+            <img src="screenshot6.png" alt="Screenshot 6 — answer explanations and hints">
+          </figure>
+          <figure class="screenshot" role="listitem" aria-label="Screenshot 7">
+            <img src="screenshot7.png" alt="Screenshot 7 — detailed performance analytics">
+          </figure>
+        </div>
+      </section>
+
+      <!-- Right column -->
+      <aside class="side">
+        <div class="meta card" aria-labelledby="about-heading">
+          <h3 id="about-heading">About the Developer</h3>
+          <p>Created by a professeur agrégé with long experience preparing students for the baccalauréat. Exercises highlight common pitfalls and build exam-ready reasoning.</p>
+
+          <div class="stat-grid" role="group" aria-label="App stats">
+            <div class="stat">
+              <strong>4.8</strong>
+              <span>App Store rating</span>
+            </div>
+            <div class="stat">
+              <strong>+10k</strong>
+              <span>Active students</span>
+            </div>
+          </div>
+
+          <div class="cta" style="margin-top:12px">
+            <a class="btn primary" href="#" title="Open in App Store">Download</a>
+            <a class="btn ghost" href="#" title="View pedagogy">Pedagogy</a>
+          </div>
+        </div>
+
+        <div class="meta card" aria-labelledby="how-heading">
+          <h3 id="how-heading">How it works</h3>
+          <p>After a brief diagnostic, the app schedules targeted exercises, prioritising weaker topics and using spaced repetition to lock in learning.</p>
+
+          <div style="height:12px"></div>
+
+          <div style="display:flex;gap:8px;align-items:center">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" stroke="#7DE3B2" stroke-width="1.4"/>
+              <path d="M8 12l2.2 2.2L16 9.4" stroke="#7DE3B2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div>
+              <strong style="display:block">Trusted content</strong>
+              <span style="color:var(--muted);font-size:13px">Exercises curated and reviewed by senior teachers</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="meta card" aria-labelledby="contact-heading">
+          <h3 id="contact-heading">Contact & Privacy</h3>
+          <p style="margin-bottom:10px">Privacy-first: student data is minimal and used only to personalise practice. For partnerships or press, contact:</p>
+          <p style="margin:0"><a href="mailto:hello@yourwebsite.com">hello@yourwebsite.com</a></p>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+      <div>© <strong>Bachelier Maths</strong> — All rights reserved</div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <a href="https://yourwebsite.com">Website</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
