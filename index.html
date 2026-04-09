@@ -230,12 +230,11 @@
   }
   .card-squat:hover { border-color: var(--squat-blue); }
 
-  /* Bachelier SVG icon */
+  /* Bachelier app icon */
   .bachelier-icon {
     width: 96px; height: 96px;
     border-radius: 22px;
-    background: linear-gradient(145deg, var(--bac-dark) 0%, #2e1f0a 100%);
-    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
     flex-shrink: 0;
   }
 
@@ -394,22 +393,9 @@
   </div>
 
   <!-- Bachelier Suite -->
-  <div class="app-card card-bachelier">
+  <a href="https://brockostudio.com/bachelier-maths.html" class="app-card card-bachelier" style="display:grid;text-decoration:none;color:inherit;">
     <div class="bachelier-icon">
-      <!-- Bachelier icon: a stylised graduation cap / bac diploma mark -->
-      <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Open book -->
-        <path d="M10 16 L26 12 L42 16 L42 38 L26 34 L10 38 Z" fill="none" stroke="#c9a84c" stroke-width="1.8" stroke-linejoin="round"/>
-        <line x1="26" y1="12" x2="26" y2="34" stroke="#c9a84c" stroke-width="1.8"/>
-        <!-- Mortarboard cap -->
-        <polygon points="26,6 36,11 26,16 16,11" fill="#c9a84c" opacity="0.9"/>
-        <line x1="36" y1="11" x2="36" y2="19" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
-        <circle cx="36" cy="20" r="1.8" fill="#c9a84c"/>
-        <!-- Integral symbol hint -->
-        <text x="18.5" y="29" font-family="Georgia, serif" font-style="italic" font-size="11" fill="#e8c97a" opacity="0.85">∫</text>
-        <!-- Pi hint -->
-        <text x="27" y="29" font-family="Georgia, serif" font-size="10" fill="#e8c97a" opacity="0.85">π</text>
-      </svg>
+      <img src="bachelier-maths-dark.png" alt="Bachelier Maths logo" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
     </div>
     <div class="app-meta">
       <div class="app-header">
@@ -440,7 +426,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </a>
 </section>
 
 <!-- ABOUT -->
